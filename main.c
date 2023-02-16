@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:41 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/16 12:52:52 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:05:01 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ int main(int argc,char **argv)
         philo_data[i].right_fork = &fork[(i + 1) % num];
         i++;
     }
+    
     i = 0;
     while(i < num)
     {
