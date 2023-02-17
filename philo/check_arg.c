@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:28:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/16 18:35:16 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:49:42 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ long	get_current_time(void)
 	gettimeofday(&start, NULL);
 	return ((start.tv_sec) * 1000 + (start.tv_usec) / 1000);
 }
-
 
 int	check_arg(t_const *philo_const)
 {

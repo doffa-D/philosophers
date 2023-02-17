@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:28:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/16 18:37:00 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:49:36 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	exit_error(void)
 	printf("Error in Params please enter: num_philo\
 	time_die time_eat time_sleep (num_eat)\n");
 }
-
 
 void	free_param(t_philo *philo_data, pthread_t *philo, pthread_mutex_t *fork)
 {
