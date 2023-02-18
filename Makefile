@@ -6,15 +6,19 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 16:46:56 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/02/17 12:44:27 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/02/17 16:06:30 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = philo/main.c \
       philo/check.c \
-      philo/check_arg.c
+      philo/check_arg.c \
+	  philo/philo.c
 
-BONUS = philo_bonus/main_bonus.c
+BONUS = philo_bonus/main_bonus.c \
+      	philo/check.c \
+      	philo/check_arg.c \
+		philo/philo.c \
 
 CC = cc
 
@@ -73,7 +77,7 @@ clean:
 	@make copy
 	@sleep 1
 	@make clean -C $(LIBFT)
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ) $(OBJ_BONUS)
 	@echo "$(GREAN) Cleaning libft is done  [✅] $(WHITE)"
 	@sleep 1
 	@echo "$(GREAN) Cleaning philo is done  [✅] $(WHITE)"

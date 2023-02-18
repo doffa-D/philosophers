@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:55:17 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/17 12:49:03 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/18 12:33:03 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+typedef struct s_const
+{
+	int				num;
+	int				argc;
+	char			**argv;
+	long			start_time;
+}					t_const;
 
 typedef struct s_philo
 {
@@ -35,24 +42,24 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 }					t_philo;
 
-typedef struct s_const
-{
-	int				num;
-	int				argc;
-	char			**argv;
-	long			start_time;
-}					t_const;
 
-int					is_int(char **argv);
-void				arg_int(t_philo *philo_data, t_const *philo_const,
-						pthread_mutex_t *fork);
-int					check_arg(t_const *philo_const);
 long				get_current_time(void);
+
+int					check(t_philo *philo_data, t_const *philo_const,
+						pthread_t *philo);
+int					is_int(char **argv);
+int					check_arg(t_const *philo_const);
+int					quick_check(t_philo *philo_data, int num);
+
+void	arg_int(t_philo *philo_data, t_const *philo_const,
+		pthread_mutex_t *fork);
 void				exit_error(void);
 void				free_param(t_philo *philo_data, pthread_t *philo,
 						pthread_mutex_t *fork);
 void				my_usleep(unsigned int usec);
-int					quick_check(t_philo *philo_data, int num);
+void				destroy_mu(t_philo *philo_data, int num);
+void				pthread(t_philo *philo);
+void				*philosopher(void *ptr);
 void				destroy_mu(t_philo *philo_data, int num);
 
 #endif
