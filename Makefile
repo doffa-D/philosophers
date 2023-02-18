@@ -6,7 +6,7 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 16:46:56 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/02/18 18:38:45 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/02/18 18:39:42 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,15 +72,12 @@ copy:
 clean: 
 	@make copy
 	@sleep 1
-	@make clean -C $(LIBFT)
 	@rm -rf $(OBJ) $(OBJ_BONUS)
-	@echo "$(GREAN) Cleaning libft is done  [✅] $(WHITE)"
 	@sleep 1
 	@echo "$(GREAN) Cleaning philo is done  [✅] $(WHITE)"
 	@sleep 1
 
 fclean: clean
-	@make fclean -C $(LIBFT)
 	@rm -rf $(NAME) $(NAME_BONUS)
 
 re: fclean all
