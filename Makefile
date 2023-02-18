@@ -6,7 +6,7 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 16:46:56 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/02/17 16:06:30 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/02/18 18:38:45 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,6 @@ NAME = philo/philo
 
 NAME_BONUS = philo_bonus/philo_bonus
 
-LIBFT = philo/libft
-
 RED = \033[31m
 GREAN = \033[32m 
 WHITE = \033[37m
@@ -45,8 +43,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make copy
-	@make -C $(LIBFT)
-	@$(CC) $(OBJ) $(FLAGS) $(LIBFT)/libft.a -o $(NAME)
+	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
 	@echo "$(GREAN) make Mandatory is done  [✅] $(WHITE)"
 	@sleep 1
 
@@ -54,8 +51,7 @@ $(NAME): $(OBJ)
 
 $(NAME_BONUS): $(OBJ_BONUS)
 	@make copy
-	@make -C $(LIBFT)
-	@$(CC) $(OBJ_BONUS) $(FLAGS) $(LIBFT)/libft.a -o $(NAME_BONUS)
+	@$(CC) $(OBJ_BONUS) $(FLAGS)  -o $(NAME_BONUS)
 	@echo "$(GREAN) make Bonus is done  [✅] $(WHITE)"
 	@sleep 1
 

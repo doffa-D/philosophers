@@ -6,14 +6,13 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:55:17 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 12:33:03 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:34:18 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "libft/libft.h"
 # include <limits.h>
 # include <pthread.h>
 # include <stdio.h>
@@ -61,5 +60,7 @@ void				destroy_mu(t_philo *philo_data, int num);
 void				pthread(t_philo *philo);
 void				*philosopher(void *ptr);
 void				destroy_mu(t_philo *philo_data, int num);
+int					ft_isdigit(int c);
+int					ft_atoi(const char *str);
 
 #endif
