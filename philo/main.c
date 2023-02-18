@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:41 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/17 13:19:41 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:08:51 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 	philo_data = malloc(sizeof(t_philo) * philo_const.num);
 	philo = malloc(sizeof(pthread_t) * philo_const.num);
 	fork = malloc(sizeof(pthread_mutex_t) * philo_const.num);
+	if (!fork || !philo_data || !philo)
+		return (NULL);
 	arg_int(philo_data, &philo_const, fork);
 	if (check(philo_data, &philo_const, philo) == 0)
 	{

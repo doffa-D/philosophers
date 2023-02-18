@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:55:17 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 18:34:18 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/18 18:47:30 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+
 typedef struct s_const
 {
 	int				num;
@@ -41,7 +42,6 @@ typedef struct s_philo
 	pthread_mutex_t	*right_fork;
 }					t_philo;
 
-
 long				get_current_time(void);
 
 int					check(t_philo *philo_data, t_const *philo_const,
@@ -50,8 +50,8 @@ int					is_int(char **argv);
 int					check_arg(t_const *philo_const);
 int					quick_check(t_philo *philo_data, int num);
 
-void	arg_int(t_philo *philo_data, t_const *philo_const,
-		pthread_mutex_t *fork);
+void				arg_int(t_philo *philo_data, t_const *philo_const,
+						pthread_mutex_t *fork);
 void				exit_error(void);
 void				free_param(t_philo *philo_data, pthread_t *philo,
 						pthread_mutex_t *fork);

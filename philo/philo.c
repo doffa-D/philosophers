@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:56:07 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/17 12:56:30 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:09:04 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,11 @@ int	check(t_philo *philo_data, t_const *philo_const, pthread_t *philo)
 	i = 0;
 	while (i < philo_const->num)
 	{
-		pthread_create(&philo[i], NULL, philosopher, &philo_data[i]);
+		if (pthread_create(&philo[i], NULL, philosopher, &philo_data[i]) != 0)
+		{
+			printf("Pthread_create field\n");
+			return (1);
+		}
 		usleep(100);
 		i++;
 	}

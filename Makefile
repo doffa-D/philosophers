@@ -6,19 +6,21 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/08 16:46:56 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/02/18 18:39:42 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/02/18 18:40:55 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = philo/main.c \
       philo/check.c \
       philo/check_arg.c \
-	  philo/philo.c
+	  philo/philo.c \
+	  philo/utils.c \
 
 BONUS = philo_bonus/main_bonus.c \
       	philo/check.c \
       	philo/check_arg.c \
 		philo/philo.c \
+		philo/utils.c \
 
 CC = cc
 

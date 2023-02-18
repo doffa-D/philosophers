@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:44:33 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 18:29:49 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:09:30 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ void	philosopher_bonus(sem_t *philo_fork, t_philo *philo_data, t_check check)
 	check.fork = philo_fork;
 	check.last_eat = get_current_time();
 	check.eating_count = 0;
-	pthread_create(&thread, NULL, check_death, &check);
+	if (pthread_create(&thread, NULL, check_death, &check) != 0)
+	{
+		printf("Pthread_create field\n");
+		exit(1);
+	}
 	while (1)
 		process(philo_fork, philo_data, &check);
 	pthread_join(thread, NULL);
@@ -113,6 +117,8 @@ int	main(int argc, char **argv)
 		return (1);
 	pid = malloc(sizeof(pid_t) * philo_const.num);
 	check = malloc(sizeof(t_check) * philo_const.num);
+	if (!pid || !check)
+		return (NULL);
 	arg_int_bonus(&philo_data, &philo_const);
 	check->num = ft_atoi(argv[1]);
 	life(&philo_fork, check, pid, philo_data);
