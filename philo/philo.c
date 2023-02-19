@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:56:07 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 20:09:04 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/19 13:31:12 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	destroy_mu(t_philo *philo_data, int num)
 
 int	check(t_philo *philo_data, t_const *philo_const, pthread_t *philo)
 {
-	int	i;
+	int				i;
+	pthread_mutex_t	protect_philo;
 
 	i = 0;
 	while (i < philo_const->num)
@@ -76,7 +77,7 @@ int	check(t_philo *philo_data, t_const *philo_const, pthread_t *philo)
 		usleep(100);
 		i++;
 	}
-	if (quick_check(philo_data, philo_const->num) == 0)
+	if (quick_check(philo_data, philo_const->num, &protect_philo) == 0)
 		return (0);
 	i = 0;
 	while (i < philo_const->num)

@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:28:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 18:44:56 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/19 13:28:46 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	my_usleep(unsigned int usec)
 	}
 }
 
-int	quick_check(t_philo *philo_data, int num)
+int	quick_check(t_philo *philo_data, int num, pthread_mutex_t *protect_philo)
 {
 	int	i;
 
@@ -50,15 +50,17 @@ int	quick_check(t_philo *philo_data, int num)
 	{
 		if (philo_data[i].philo_total_eat == num)
 		{
-			destroy_mu(philo_data, num);
 			printf("Philo has finished eating\n");
+			destroy_mu(philo_data, num);
 			return (0);
 		}
 		if (get_current_time()
 			- philo_data[i].last_eat >= philo_data->philo_die)
 		{
+			pthread_mutex_lock(protect_philo);
 			printf("%ld %d died\n", get_current_time()
 				- philo_data[i].first_eat, philo_data->id);
+			pthread_mutex_unlock(protect_philo);
 			destroy_mu(philo_data, num);
 			return (0);
 		}

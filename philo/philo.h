@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:55:17 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 18:47:30 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/19 13:29:21 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int					check(t_philo *philo_data, t_const *philo_const,
 						pthread_t *philo);
 int					is_int(char **argv);
 int					check_arg(t_const *philo_const);
-int					quick_check(t_philo *philo_data, int num);
-
+int					quick_check(t_philo *philo_data, int num,
+						pthread_mutex_t *protect_philo);
 void				arg_int(t_philo *philo_data, t_const *philo_const,
 						pthread_mutex_t *fork);
 void				exit_error(void);

@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:28:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 23:01:27 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/19 13:00:12 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	arg_int(t_philo *philo_data, t_const *philo_const,
 		if (philo_const->argc == 6)
 			philo_data[i].philo_must_eat = ft_atoi(philo_const->argv[5]);
 		else
-			philo_data[i].philo_must_eat = -1;
+			philo_data[i].philo_must_eat = INT_MAX;
 		philo_data[i].left_fork = &fork[i];
 		philo_data[i].right_fork = &fork[(i + 1) % philo_const->num];
 		i++;
