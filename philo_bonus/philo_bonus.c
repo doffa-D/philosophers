@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 18:27:35 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 18:30:10 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/19 11:37:17 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	kill_process_b(int *pid, int num, sem_t *philo_fork)
 		kill(pid[i], SIGINT);
 		i++;
 	}
-	sem_unlink("my_forks");
+	sem_unlink("/my_forks");
 	sem_close(philo_fork);
 }
 

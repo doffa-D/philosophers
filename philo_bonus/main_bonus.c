@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 12:44:33 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 20:09:30 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/02/19 12:38:40 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	philosopher_bonus(sem_t *philo_fork, t_philo *philo_data, t_check check)
 	if (pthread_create(&thread, NULL, check_death, &check) != 0)
 	{
 		printf("Pthread_create field\n");
+		free(&check);
 		exit(1);
 	}
 	while (1)
@@ -79,8 +80,8 @@ void	life(sem_t *philo_fork, t_check *check, pid_t *pid, t_philo philo_data)
 	int	i;
 
 	i = 1;
-	sem_unlink("my_forks");
-	philo_fork = sem_open("my_forks", O_CREAT, 0700, check->num);
+	sem_unlink("/my_forks");
+	philo_fork = sem_open("/my_forks", O_CREAT, 0700, check->num);
 	while (i <= check->num)
 	{
 		pid[i] = fork();
@@ -118,8 +119,10 @@ int	main(int argc, char **argv)
 	pid = malloc(sizeof(pid_t) * philo_const.num);
 	check = malloc(sizeof(t_check) * philo_const.num);
 	if (!pid || !check)
-		return (NULL);
+		return (1);
 	arg_int_bonus(&philo_data, &philo_const);
 	check->num = ft_atoi(argv[1]);
 	life(&philo_fork, check, pid, philo_data);
+	free(pid);
+	free(check);
 }
