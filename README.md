@@ -44,4 +44,6 @@ This program simulates the dining philosophers problem, in which a number of phi
 ## Installation
 
 To compile the program, simply run the following command:
-```MAke```
+```
+Make
+```
