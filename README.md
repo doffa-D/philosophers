@@ -36,3 +36,12 @@ Your program must be written in C and follow the Norm, which is a set of rules f
 
 
 You may choose to complete a bonus section for the project, but it will be evaluated separately from the mandatory section. If you choose to use your own libraries, you must provide a Makefile that compiles both your project and the library.
+
+# Dining Philosophers Problem
+
+This program simulates the dining philosophers problem, in which a number of philosophers sit at a round table and have to eat using shared forks. Each philosopher has to alternate between eating, sleeping, and thinking, while holding two forks to eat.
+
+## Installation
+
+To compile the program, simply run the following command:
+```MAke```
