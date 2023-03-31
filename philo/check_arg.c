@@ -5,91 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 18:28:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/19 13:00:12 by hdagdagu         ###   ########.fr       */
+/*   Created: 2023/03/28 15:45:19 by hdagdagu          #+#    #+#             */
+/*   Updated: 2023/03/31 16:45:49 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_current_time(void)
-{
-	struct timeval	start;
-
-	gettimeofday(&start, NULL);
-	return ((start.tv_sec) * 1000 + (start.tv_usec) / 1000);
-}
-
-int	check_arg(t_const *philo_const)
-{
-	if (philo_const->argc < 5)
-	{
-		exit_error();
-		return (1);
-	}
-	if (is_int(philo_const->argv) == 1)
-		return (1);
-	if (ft_atoi(philo_const->argv[2]) <= 0 || ft_atoi(philo_const->argv[3]) <= 0
-		|| ft_atoi(philo_const->argv[4]) <= 0
-		|| ft_atoi(philo_const->argv[1]) <= 0)
-	{
-		printf("error\n");
-		return (1);
-	}
-	if (philo_const->argc == 6)
-	{
-		if (ft_atoi(philo_const->argv[5]) <= 0)
-		{
-			printf("error\n");
-			return (1);
-		}
-	}
-	return (0);
-}
-
-void	arg_int(t_philo *philo_data, t_const *philo_const,
-		pthread_mutex_t *fork)
-{
-	int	i;
-
-	i = 0;
-	while (i < philo_const->num)
-		pthread_mutex_init(&fork[i++], NULL);
-	i = 0;
-	while (i < philo_const->num)
-	{
-		philo_data[i].id = i;
-		philo_data[i].first_eat = philo_const->start_time;
-		philo_data[i].last_eat = philo_const->start_time;
-		philo_data[i].philo_die = ft_atoi(philo_const->argv[2]);
-		philo_data[i].philo_eat = ft_atoi(philo_const->argv[3]);
-		philo_data[i].philo_sleep = ft_atoi(philo_const->argv[4]);
-		if (philo_const->argc == 6)
-			philo_data[i].philo_must_eat = ft_atoi(philo_const->argv[5]);
-		else
-			philo_data[i].philo_must_eat = INT_MAX;
-		philo_data[i].left_fork = &fork[i];
-		philo_data[i].right_fork = &fork[(i + 1) % philo_const->num];
-		i++;
-	}
-}
-
-int	is_int(char **argv)
+int	check_is_digit(char **av, int ac)
 {
 	int	i;
 	int	j;
 
+	j = 0;
 	i = 1;
-	while (argv[i])
+	while (ac > i && av[i])
 	{
 		j = 0;
-		while (argv[i][j])
+		while (av[i][j])
 		{
-			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
-				return (1);
-			j++;
+			if (ft_isdigit(av[i][j++]) == 0)
+			{
+				printf("error\n");
+				return (FALSE);
+			}
 		}
 		i++;
 	}
-	return (0);
+	return (TRUE);
+}
+
+int	check_arg(int ac, char **av)
+{
+	if (ac != 5 && ac != 6)
+		return (FALSE);
+	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[2]) <= 0 || ft_atoi(av[3]) <= 0
+		|| ft_atoi(av[4]) <= 0 || check_is_digit(av, ac) == FALSE)
+		return (FALSE);
+	if (av[5])
+		if (ft_atoi(av[1]) <= 0)
+			return (FALSE);
+	return (TRUE);
+}
+
+void	print(t_philo *philo, char *str, long time)
+{
+	int		check;
+	(void)str;
+	(void)time;
+	pthread_mutex_lock(philo->data_race);
+	check = *(philo->check);
+	pthread_mutex_unlock(philo->data_race);
+	if (check)
+	{
+		pthread_mutex_lock(philo->print);
+		printf("%ld %d %s", time, philo->id + 1, str);
+		pthread_mutex_unlock(philo->print);
+	}
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 18:33:00 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/18 18:34:42 by hdagdagu         ###   ########.fr       */
+/*   Created: 2023/03/19 18:31:21 by hdagdagu          #+#    #+#             */
+/*   Updated: 2023/03/28 16:02:16 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	ft_isdigit(int c)
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	result;
-	int	sing;
+	int		i;
+	int		result;
+	int		sing;
 
 	result = 0;
 	sing = 1;

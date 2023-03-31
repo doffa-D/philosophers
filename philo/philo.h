@@ -5,13 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 16:55:17 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/02/19 13:29:21 by hdagdagu         ###   ########.fr       */
+/*   Created: 2023/03/19 18:28:23 by hdagdagu          #+#    #+#             */
+/*   Updated: 2023/03/28 16:03:40 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+# define TRUE 0
+# define FALSE 1
 
 # include <limits.h>
 # include <pthread.h>
@@ -20,47 +23,44 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-typedef struct s_const
-{
-	int				num;
-	int				argc;
-	char			**argv;
-	long			start_time;
-}					t_const;
-
 typedef struct s_philo
 {
+	int				*total;
 	int				id;
-	int				philo_die;
-	int				philo_eat;
-	int				philo_sleep;
-	int				philo_must_eat;
-	int				philo_total_eat;
-	long			first_eat;
+	int				die;
+	int				sleep;
+	int				eat;
+	int				must_eat;
+	int				num;
+	long			start_time;
 	long			last_eat;
+	int				*check;
+	long			creating_time;
+	pthread_mutex_t	*print;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*data_race;
 }					t_philo;
 
-long				get_current_time(void);
+long				current_time(void);
 
-int					check(t_philo *philo_data, t_const *philo_const,
-						pthread_t *philo);
-int					is_int(char **argv);
-int					check_arg(t_const *philo_const);
-int					quick_check(t_philo *philo_data, int num,
-						pthread_mutex_t *protect_philo);
-void				arg_int(t_philo *philo_data, t_const *philo_const,
-						pthread_mutex_t *fork);
-void				exit_error(void);
-void				free_param(t_philo *philo_data, pthread_t *philo,
-						pthread_mutex_t *fork);
-void				my_usleep(unsigned int usec);
-void				destroy_mu(t_philo *philo_data, int num);
-void				pthread(t_philo *philo);
-void				*philosopher(void *ptr);
-void				destroy_mu(t_philo *philo_data, int num);
-int					ft_isdigit(int c);
 int					ft_atoi(const char *str);
+int					ft_isdigit(int c);
+int					check_arg(int ac, char **av);
+int					check_is_digit(char **av, int ac);
+int					check_rotin(t_philo *philo, int num);
+
+void				*rotin(void *s);
+void				free_all(pthread_t *faylasof, t_philo *philo);
+void				print(t_philo *philo, char *str, long time);
+void				creating_tread(pthread_t *faylasof, t_philo *philo);
+void				create_fork(t_philo *philo);
+void				philosopher(t_philo *philo, pthread_t *faylasof);
+void				thread_join(pthread_t *faylasof, t_philo *philo);
+void				check_must_eat(t_philo *philo, int i);
+void				my_sleep(unsigned int sleep, t_philo *philo);
+void				init_mutex(t_philo *philo, pthread_mutex_t *fork);
+void				init_argv(t_philo *philo, int i, char **argv, int argc);
+void				initialize_arg(t_philo *philo, char **argv, int argc);
 
 #endif
