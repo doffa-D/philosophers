@@ -6,7 +6,7 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 18:28:33 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/03/31 18:10:39 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/04/01 15:58:18 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(HD)
 	@make copy
 	@$(CC) $(OBJ) $(FLAGS) -o $(NAME)
-	@echo "$(RED)DO🦩:$(GREAN)make Mandatory is done  [✅] $(WHITE)"
+	@echo "$(RED)DO🦩:$(GREAN) Bouns is Ready  [✅] $(WHITE)"
 	@sleep $(TIMER_DELAY)
 
 %.o: %.c
