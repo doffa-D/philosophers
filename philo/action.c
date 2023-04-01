@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:36:31 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/31 17:06:09 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:55:05 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int	eating(t_philo *philo, int counter)
 	counter++;
 	if (counter == philo->must_eat)
 		*(philo->total) += 1;
-	my_sleep(philo->eat, philo);
+	my_sleep(philo->eat);
 	return (counter);
 }
 
 void	sleeping(t_philo *philo)
 {
 	print(philo, "is sleeping\n", current_time() - philo->creating_time);
-	my_sleep(philo->sleep, philo);
+	my_sleep(philo->sleep);
 	print(philo, "is thinking\n", current_time() - philo->creating_time);
 }
 

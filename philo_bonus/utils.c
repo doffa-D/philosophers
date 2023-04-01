@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:31:21 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/30 17:51:54 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:57:06 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	ft_atoi(const char *str)
 	return (result * sing);
 }
 
-
-
 int	ft_counte(long int nb)
 {
 	int	i;
@@ -70,7 +68,7 @@ char	*ft_itoa(int n)
 
 	nb = n;
 	len = ft_counte(nb);
-	dst = malloc(len +1);
+	dst = malloc(len + 1);
 	if (!dst)
 		return (0);
 	if (nb < 0)

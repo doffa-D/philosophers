@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:45:19 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/31 16:45:49 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:49:17 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,32 @@ int	check_is_digit(char **av, int ac)
 int	check_arg(int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
+	{
+		printf("Usage: ./philo <number_of_philos> <time_to_die> <time_to_eat> \
+		 <time_to_sleep> [number_of_times_eacih_philosopher_must_eat]\n");
 		return (FALSE);
+	}
 	if (ft_atoi(av[1]) <= 0 || ft_atoi(av[2]) <= 0 || ft_atoi(av[3]) <= 0
 		|| ft_atoi(av[4]) <= 0 || check_is_digit(av, ac) == FALSE)
+	{
+		printf("ERROR\n");
 		return (FALSE);
+	}
 	if (av[5])
-		if (ft_atoi(av[1]) <= 0)
+	{
+		if (ft_atoi(av[5]) <= 0)
+		{
+			printf("ERROR\n");
 			return (FALSE);
+		}
+	}
 	return (TRUE);
 }
 
 void	print(t_philo *philo, char *str, long time)
 {
 	int		check;
-	(void)str;
-	(void)time;
+
 	pthread_mutex_lock(philo->data_race);
 	check = *(philo->check);
 	pthread_mutex_unlock(philo->data_race);

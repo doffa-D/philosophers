@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:28:23 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/28 16:03:40 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:22:06 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				create_fork(t_philo *philo);
 void				philosopher(t_philo *philo, pthread_t *faylasof);
 void				thread_join(pthread_t *faylasof, t_philo *philo);
 void				check_must_eat(t_philo *philo, int i);
-void				my_sleep(unsigned int sleep, t_philo *philo);
+void				my_sleep(unsigned int sleep);
 void				init_mutex(t_philo *philo, pthread_mutex_t *fork);
 void				init_argv(t_philo *philo, int i, char **argv, int argc);
 void				initialize_arg(t_philo *philo, char **argv, int argc);

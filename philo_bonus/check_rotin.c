@@ -6,16 +6,16 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:08:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/31 18:26:37 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:54:24 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 void	kill_process_b(t_philo *philo)
 {
 	int	i;
+
 	i = 0;
 	while (i <= philo[0].num)
 	{
@@ -26,9 +26,8 @@ void	kill_process_b(t_philo *philo)
 	sem_close(philo->fork);
 	sem_close(philo->print);
 	sem_close(philo->data_race);
-    free(philo);
+	free(philo);
 }
-
 
 void	print(t_philo *philo, char *str, long time)
 {
@@ -37,12 +36,11 @@ void	print(t_philo *philo, char *str, long time)
 	sem_post(philo->print);
 }
 
-
 void	*check_rotin(void *arg)
 {
 	t_philo	*philo;
-	long time;
-	long last;
+	long	time;
+	long	last;
 
 	philo = arg;
 	while (1)
@@ -55,7 +53,7 @@ void	*check_rotin(void *arg)
 		{
 			usleep(100);
 			sem_wait(philo->print);
-			printf("%ld %d died\n",time - philo->creating_time,philo->id);
+			printf("%ld %d died\n", time - philo->creating_time, philo->id);
 			kill_process_b(philo);
 			exit(1);
 		}
@@ -65,19 +63,19 @@ void	*check_rotin(void *arg)
 
 void	philosopher(t_philo *philo)
 {
-	int i;
+	int		i;
 	pid_t	pid;
 
 	sem_unlink("/my_forks");
 	sem_unlink("/my_print");
 	philo->fork = sem_open("/my_forks", O_CREAT | O_EXCL, 0644, philo->num);
 	i = 0;
-	while(i < philo->num)
+	while (i < philo->num)
 	{
 		pid = fork();
-		if(pid == 0)
+		if (pid == 0)
 		{
-			rotine(&philo[i],philo->fork);
+			rotine(&philo[i], philo->fork);
 		}
 		else
 			philo[i].pid = pid;

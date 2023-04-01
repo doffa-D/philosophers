@@ -6,11 +6,21 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:46:41 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/31 16:43:46 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:02:32 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+long	current_time(void)
+{
+	struct timeval	start;
+	long			my_time;
+
+	gettimeofday(&start, NULL);
+	my_time = (start.tv_sec) * 1000 + (start.tv_usec) / 1000;
+	return (my_time);
+}
 
 void	thread_join(pthread_t *faylasof, t_philo *philo)
 {
@@ -38,7 +48,6 @@ void	create_fork(t_philo *philo)
 	pthread_mutex_t	*fork;
 
 	i = 0;
-
 	fork = malloc(sizeof(pthread_mutex_t) * philo[i].num);
 	init_mutex(philo, fork);
 	while (i < philo[0].num)
@@ -54,7 +63,6 @@ void	creating_tread(pthread_t *faylasof, t_philo *philo)
 	int	i;
 
 	i = 0;
-
 	while (i < philo[0].num)
 	{
 		pthread_create(&faylasof[i], NULL, rotin, &philo[i]);

@@ -6,10 +6,9 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:07:32 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/03/31 16:28:27 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/01 15:55:40 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "philo.h"
 
@@ -23,12 +22,11 @@ long	current_time(void)
 	return (my_time);
 }
 
-void	my_sleep(unsigned int sleep, t_philo *philo)
+void	my_sleep(unsigned int sleep)
 {
 	long	time;
 	long	start;
 
-	(void)philo;
 	time = 0;
 	start = current_time();
 	while (time < sleep)
@@ -55,8 +53,8 @@ void	initialize_arg(t_philo *philo, char **argv, int argc)
 	int			i;
 	long		creating;
 	static int	check;
-	sem_t *print;
-	
+	sem_t		*print;
+
 	sem_unlink("/my_print");
 	print = sem_open("/my_print", O_CREAT | O_EXCL, 0644, 1);
 	i = 0;
@@ -73,5 +71,4 @@ void	initialize_arg(t_philo *philo, char **argv, int argc)
 		init_argv(philo, i, argv, argc);
 		i++;
 	}
-
 }
