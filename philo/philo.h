@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 18:28:23 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/04/01 15:22:06 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:55:03 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,20 @@ int					ft_atoi(const char *str);
 int					ft_isdigit(int c);
 int					check_arg(int ac, char **av);
 int					check_is_digit(char **av, int ac);
-int					check_rotin(t_philo *philo, int num);
+int					check_rotin(t_philo *philo);
+int					eating(t_philo *philo, int counter);
+int					taking_fork(t_philo *philo);
+int					putting_fork(t_philo *philo);
+int					print(t_philo *philo, char *str, long time);
+int					check_must_eat(t_philo *philo, int i);
 
+int					sleeping(t_philo *philo);
 void				*rotin(void *s);
 void				free_all(pthread_t *faylasof, t_philo *philo);
-void				print(t_philo *philo, char *str, long time);
 void				creating_tread(pthread_t *faylasof, t_philo *philo);
 void				create_fork(t_philo *philo);
 void				philosopher(t_philo *philo, pthread_t *faylasof);
 void				thread_join(pthread_t *faylasof, t_philo *philo);
-void				check_must_eat(t_philo *philo, int i);
 void				my_sleep(unsigned int sleep);
 void				init_mutex(t_philo *philo, pthread_mutex_t *fork);
 void				init_argv(t_philo *philo, int i, char **argv, int argc);

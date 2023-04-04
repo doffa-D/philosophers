@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:46:41 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/04/01 15:02:32 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:39:04 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	thread_join(pthread_t *faylasof, t_philo *philo)
 	i = 0;
 	while (i < philo[0].num)
 	{
-		pthread_join(faylasof[i], NULL);
+		if (pthread_join(faylasof[i], NULL) != 0)
+		{
+			printf("ERORR: Protection !!\n");
+			break ;
+		}
 		i++;
 	}
 	free_all(faylasof, philo);
@@ -38,7 +42,8 @@ void	thread_join(pthread_t *faylasof, t_philo *philo)
 void	philosopher(t_philo *philo, pthread_t *faylasof)
 {
 	creating_tread(faylasof, philo);
-	check_rotin(philo, philo->num);
+	if (check_rotin(philo) != 0)
+		printf("ERORR: Protection !!\n");
 	thread_join(faylasof, philo);
 }
 
@@ -65,7 +70,11 @@ void	creating_tread(pthread_t *faylasof, t_philo *philo)
 	i = 0;
 	while (i < philo[0].num)
 	{
-		pthread_create(&faylasof[i], NULL, rotin, &philo[i]);
+		if (pthread_create(&faylasof[i], NULL, rotin, &philo[i]) != 0)
+		{
+			printf("ERORR: Protection !!\n");
+			break ;
+		}
 		usleep(10);
 		i++;
 	}

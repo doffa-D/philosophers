@@ -6,7 +6,7 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 18:28:33 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/04/01 15:58:18 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/04/04 17:43:26 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ SRC = main.c \
 		initialize.c \
 		check_arg.c \
 		check_rotin.c \
+		life.c \
 
-CC = cc 
+CC = cc -Wall -Werror -Wunused-variable
 
 HD = philo.h
 

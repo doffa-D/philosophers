@@ -6,35 +6,47 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 15:36:31 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/04/01 14:55:05 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:54:56 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	putting_fork(t_philo *philo)
+int	putting_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+	if (pthread_mutex_unlock(philo->right_fork) != 0)
+		return (1);
+	if (pthread_mutex_unlock(philo->left_fork) != 0)
+		return (1);
+	return (0);
 }
 
 int	taking_fork(t_philo *philo)
 {
-	pthread_mutex_lock(philo->right_fork);
-	print(philo, "has taken a fork\n", current_time() - philo->creating_time);
-	if (philo->num == 1)
+	if (pthread_mutex_lock(philo->right_fork) != 0)
 		return (1);
-	pthread_mutex_lock(philo->left_fork);
-	print(philo, "has taken a fork\n", current_time() - philo->creating_time);
+	if (print(philo, "has taken a fork\n", current_time()
+			- philo->creating_time) != 0)
+		return (1);
+	if (philo->num == 1)
+		return (-1);
+	if (pthread_mutex_lock(philo->left_fork) != 0)
+		return (1);
+	if (print(philo, "has taken a fork\n", current_time()
+			- philo->creating_time) != 0)
+		return (1);
 	return (0);
 }
 
 int	eating(t_philo *philo, int counter)
 {
-	print(philo, "is eating\n", current_time() - philo->creating_time);
-	pthread_mutex_lock(philo->data_race);
+	if (print(philo, "is eating\n", current_time() - philo->creating_time) != 0)
+		return (-1);
+	if (pthread_mutex_lock(philo->data_race) != 0)
+		return (-1);
 	philo->last_eat = current_time();
-	pthread_mutex_unlock(philo->data_race);
+	if (pthread_mutex_unlock(philo->data_race) != 0)
+		return (-1);
 	counter++;
 	if (counter == philo->must_eat)
 		*(philo->total) += 1;
@@ -42,37 +54,14 @@ int	eating(t_philo *philo, int counter)
 	return (counter);
 }
 
-void	sleeping(t_philo *philo)
+int	sleeping(t_philo *philo)
 {
-	print(philo, "is sleeping\n", current_time() - philo->creating_time);
+	if (print(philo, "is sleeping\n", current_time()
+			- philo->creating_time) != 0)
+		return (-1);
 	my_sleep(philo->sleep);
-	print(philo, "is thinking\n", current_time() - philo->creating_time);
-}
-
-void	*rotin(void *s)
-{
-	t_philo	*philo;
-	int		counter;
-	int		check;
-
-	counter = 0;
-	check = 1;
-	philo = (t_philo *)s;
-	if ((philo->id) % 2 == 1)
-		usleep(300);
-	while (check)
-	{
-		pthread_mutex_lock(philo->data_race);
-		check = *philo->check;
-		pthread_mutex_unlock(philo->data_race);
-		if (taking_fork(philo) == 1 || *(philo->total) == philo->num)
-		{
-			putting_fork(philo);
-			break ;
-		}
-		counter = eating(philo, counter);
-		putting_fork(philo);
-		sleeping(philo);
-	}
-	return (NULL);
+	if (print(philo, "is thinking\n", current_time()
+			- philo->creating_time) != 0)
+		return (-1);
+	return (0);
 }

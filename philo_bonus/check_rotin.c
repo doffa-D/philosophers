@@ -6,7 +6,7 @@
 /*   By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 16:08:48 by hdagdagu          #+#    #+#             */
-/*   Updated: 2023/04/01 15:54:24 by hdagdagu         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:45:18 by hdagdagu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ void	kill_process_b(t_philo *philo)
 	free(philo);
 }
 
-void	print(t_philo *philo, char *str, long time)
+int	print(t_philo *philo, char *str, long time)
 {
-	sem_wait(philo->print);
+	if (sem_wait(philo->print) == -1)
+		return (1);
 	printf("%ld %d %s", time, philo->id + 1, str);
-	sem_post(philo->print);
+	if (sem_post(philo->print) == -1)
+		return (1);
+	return (0);
 }
 
 void	*check_rotin(void *arg)
@@ -45,14 +48,17 @@ void	*check_rotin(void *arg)
 	philo = arg;
 	while (1)
 	{
-		sem_wait(philo->data_race);
+		if (sem_wait(philo->data_race) == -1)
+			return ((void *)1);
 		time = current_time();
 		last = philo->last_eat;
-		sem_post(philo->data_race);
+		if (sem_post(philo->data_race) == -1)
+			return ((void *)1);
 		if (time - last >= philo->die)
 		{
 			usleep(100);
-			sem_wait(philo->print);
+			if (sem_wait(philo->print) == -1)
+				return ((void *)1);
 			printf("%ld %d died\n", time - philo->creating_time, philo->id);
 			kill_process_b(philo);
 			exit(1);
@@ -61,13 +67,13 @@ void	*check_rotin(void *arg)
 	return (NULL);
 }
 
-void	philosopher(t_philo *philo)
+int	philosopher(t_philo *philo)
 {
 	int		i;
 	pid_t	pid;
 
-	sem_unlink("/my_forks");
-	sem_unlink("/my_print");
+	if (sem_unlink("/my_forks") == -1 || sem_unlink("/my_print") == -1)
+		return (1);
 	philo->fork = sem_open("/my_forks", O_CREAT | O_EXCL, 0644, philo->num);
 	i = 0;
 	while (i < philo->num)
@@ -75,7 +81,8 @@ void	philosopher(t_philo *philo)
 		pid = fork();
 		if (pid == 0)
 		{
-			rotine(&philo[i], philo->fork);
+			if (rotine(&philo[i], philo->fork) == 1)
+				return (1);
 		}
 		else
 			philo[i].pid = pid;
@@ -83,4 +90,5 @@ void	philosopher(t_philo *philo)
 		usleep(10);
 	}
 	waitpid(-1, &pid, 0);
+	return (0);
 }

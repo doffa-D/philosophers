@@ -6,7 +6,7 @@
 #    By: hdagdagu <hdagdagu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/19 18:28:33 by hdagdagu          #+#    #+#              #
-#    Updated: 2023/04/01 15:58:24 by hdagdagu         ###   ########.fr        #
+#    Updated: 2023/04/04 15:21:35 by hdagdagu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =	main.c \
 		creat_thread.c \
 		free_all.c \
 		initialize.c \
+		life.c \
 
 CC =  cc -Wall -Werror -Wextra
 
